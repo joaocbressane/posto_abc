@@ -1,0 +1,56 @@
+-- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+DROP TABLE ABASTECIMENTO;
+DROP TABLE BOMBA_COMBUSTIVEL;
+DROP TABLE TANQUE;
+DROP TABLE COMBUSTIVEL;
+
+
+CREATE TABLE BOMBA_COMBUSTIVEL (
+id_bomba integer PRIMARY KEY,
+id_tanque integer
+);
+
+CREATE TABLE ABASTECIMENTO (
+id_abastecimento integer PRIMARY KEY,
+data timestamp,
+qtd_litros numeric (5,2),
+imposto numeric (5,2),
+preco_combustivel numeric (5,2),
+valortotal numeric (5,2),
+id_bomba integer,
+FOREIGN KEY(id_bomba) REFERENCES BOMBA_COMBUSTIVEL (id_bomba)
+);
+
+CREATE TABLE COMBUSTIVEL (
+id_combustivel integer PRIMARY KEY,
+descricao varchar(20),
+preco numeric (5,2)
+);
+
+CREATE TABLE TANQUE (
+id_tanque integer PRIMARY KEY,
+id_combustivel integer,
+FOREIGN KEY(id_combustivel) REFERENCES COMBUSTIVEL (id_combustivel)
+);
+
+ALTER TABLE BOMBA_COMBUSTIVEL ADD FOREIGN KEY(id_tanque) REFERENCES TANQUE (id_tanque);
+
+
+INSERT INTO COMBUSTIVEL VALUES(1,'GASOLINA', 6);
+INSERT INTO COMBUSTIVEL VALUES(2,'OLEO DIESEL', 5);
+
+INSERT INTO TANQUE VALUES(1,1);
+INSERT INTO TANQUE VALUES(2,2);
+
+INSERT INTO BOMBA_COMBUSTIVEL VALUES(1,1);
+INSERT INTO BOMBA_COMBUSTIVEL VALUES(2,1);
+INSERT INTO BOMBA_COMBUSTIVEL VALUES(3,2);
+INSERT INTO BOMBA_COMBUSTIVEL VALUES(4,2);
+
+COMMIT;
+
+
+
+

@@ -1,0 +1,4 @@
+Aplicação desenvolvida utilizando as seguintes tecnologias:
+ - Delphi 10.3 Rio
+ - Firebird 2.5
+ - Fortes Report
